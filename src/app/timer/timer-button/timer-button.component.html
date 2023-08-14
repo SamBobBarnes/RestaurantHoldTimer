@@ -1,0 +1,6 @@
+<div class="timer" [ngClass]="{ 'center-span': timeDisplay === '' }">
+  <span class="timer-text text">{{ textDisplay }}</span>
+  <span *ngIf="timeDisplay !== ''" class="timer-time text">{{
+    timeDisplay
+  }}</span>
+</div>

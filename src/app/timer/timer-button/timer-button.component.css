@@ -1,0 +1,27 @@
+.timer {
+  width: 8rem;
+  height: 3rem;
+  background-color: #ddd;
+  border: solid 2px #000;
+  margin: 1px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+
+  &.center-span {
+    justify-content: center;
+  }
+
+  .timer-text {
+    padding-left: 0.5rem;
+  }
+
+  .timer-time {
+    padding-right: 0.5rem;
+  }
+
+  .text {
+    font-family: Roboto, sans-serif;
+  }
+}
