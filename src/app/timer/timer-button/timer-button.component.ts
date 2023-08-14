@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TimerButtonComponent implements OnInit {
   @Input() text: string;
   @Input() time: number;
-  timeDisplay: string;
+  timeDisplay: string = '';
   textDisplay: string = '';
 
   ngOnInit() {
