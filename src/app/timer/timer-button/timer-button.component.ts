@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faCheck, faX } from '@fortawesome/free-solid-svg-icons';
-import { logDOM } from '@testing-library/angular';
 
 @Component({
   selector: 'app-timer-button',
