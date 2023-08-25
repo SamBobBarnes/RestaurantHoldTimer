@@ -15,13 +15,43 @@
 
   .timer-text {
     padding-left: 0.5rem;
+    z-index: 100;
   }
 
   .timer-time {
     padding-right: 0.5rem;
+    z-index: 100;
   }
 
   .text {
     font-family: Roboto, sans-serif;
+    z-index: 100;
+  }
+
+  .color-bar {
+    position: absolute;
+    height: 3rem;
+    z-index: 10;
+    &.progress-bar {
+      background-color: #50e350;
+      transition-duration: 1s;
+    }
+
+    &.end-bar {
+      width: 8rem;
+      animation: blinkingEndButton 1s infinite;
+    }
+  }
+}
+
+@keyframes blinkingEndButton {
+  0% {
+    background-color: #f13535;
+  }
+  50% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: #f13535;
   }
 }

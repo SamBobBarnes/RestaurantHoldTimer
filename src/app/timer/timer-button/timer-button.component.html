@@ -1,5 +1,21 @@
-<div class="timer" [ngClass]="{ 'center-span': timeDisplay === '' }">
-  <span class="timer-text text">{{ textDisplay }}</span>
+<div
+  class="timer"
+  [ngClass]="{ 'center-span': timeDisplay === '' }"
+  (click)="timer()"
+>
+  <div
+    class="progress-bar color-bar"
+    *ngIf="timerRunning"
+    [style]="progressBarStyle()"
+  ></div>
+  <div
+    class="end-bar color-bar"
+    *ngIf="timerComplete"
+    [style]="progressBarStyle()"
+  ></div>
+  <span [className]="timerRunning ? 'timer-text text' : 'text'">{{
+    textDisplay
+  }}</span>
   <span *ngIf="timeDisplay !== ''" class="timer-time text">{{
     timeDisplay
   }}</span>
