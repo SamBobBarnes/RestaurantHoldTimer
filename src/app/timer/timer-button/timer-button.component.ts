@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-// import { faCheck, faX } from '@fortawesome/free-solid-svg-icon';
+import { faCheck, faX } from '@fortawesome/free-solid-svg-icons';
+import { logDOM } from '@testing-library/angular';
 
 @Component({
   selector: 'app-timer-button',
@@ -15,13 +16,14 @@ export class TimerButtonComponent implements OnInit {
   timerRunning: boolean = false;
   interval: string | number | NodeJS.Timeout;
   timerComplete: boolean = false;
-  // faCheck = faCheck;
-  // fax = faX;
+  displayChoice: boolean = false;
+  faCheck = faCheck;
+  fax = faX;
 
   ngOnInit() {
     this.textDisplay = this.text;
     this.checkTextLength();
-    this.defaultTime = this.time + 0;
+    this.defaultTime = 0 + this.time;
   }
 
   checkTextLength() {
@@ -42,10 +44,18 @@ export class TimerButtonComponent implements OnInit {
     if (this.timerComplete) {
       this.timerComplete = false;
     } else if (this.timerRunning) {
-      this.endTimer();
-    } else {
+      this.displayChoice = true;
+    } else if (!this.timerRunning) {
       this.startTimer();
     }
+  }
+
+  confirm() {
+    this.endTimer();
+  }
+
+  cancel() {
+    this.displayChoice = false;
   }
 
   startTimer() {
@@ -54,7 +64,6 @@ export class TimerButtonComponent implements OnInit {
     this.checkTextLength();
     this.interval = setInterval(() => {
       if (this.time === 0) {
-        this.time = this.defaultTime;
         this.timerComplete = true;
         this.endTimer();
       } else {
@@ -74,9 +83,13 @@ export class TimerButtonComponent implements OnInit {
     );
   }
   endTimer() {
+    this.time = this.defaultTime;
+    this.displayChoice = false;
     this.timerRunning = false;
     clearInterval(this.interval);
     this.timeDisplay = '';
     this.checkTextLength();
   }
+
+  protected readonly faX = faX;
 }
