@@ -1,20 +1,27 @@
 <div class="timer" [ngClass]="{ 'center-span': timeDisplay === '' }">
-  <div class="timer-click float" (click)="timer()" *ngIf="!displayChoice"></div>
+  <div
+    class="timer-click float"
+    (click)="timer()"
+    *ngIf="!displayChoice"
+    title="timer-click"
+  ></div>
   <div
     class="progress-bar color-bar float"
+    title="progress-bar"
     *ngIf="timerRunning"
     [style]="progressBarStyle()"
   ></div>
   <div
     class="end-bar color-bar float"
+    title="end-bar"
     *ngIf="timerComplete"
     [style]="progressBarStyle()"
   ></div>
-  <div class="choice" *ngIf="displayChoice">
-    <div (click)="confirm()" class="check button">
+  <div class="choice" *ngIf="displayChoice" title="choice">
+    <div (click)="confirm()" class="check button" title="confirm">
       <fa-icon class="icon fa-2xl" [icon]="faCheck"></fa-icon>
     </div>
-    <div (click)="cancel()" class="x button">
+    <div (click)="cancel()" class="x button" title="x">
       <fa-icon class="icon fa-2xl" [icon]="fax"></fa-icon>
     </div>
   </div>
