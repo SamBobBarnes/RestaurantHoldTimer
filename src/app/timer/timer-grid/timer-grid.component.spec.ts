@@ -1,21 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TimerGridComponent } from './timer-grid.component';
+import { renderRootComponent } from '../../common-components/RenderRootComponent';
 
 describe('TimerGridComponent', () => {
-  let component: TimerGridComponent;
-  let fixture: ComponentFixture<TimerGridComponent>;
+  beforeEach(() => {});
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [TimerGridComponent]
-    });
-    fixture = TestBed.createComponent(TimerGridComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
+  it('should create', async () => {
+    const component = await renderRootComponent(TimerGridComponent);
     expect(component).toBeTruthy();
   });
 });

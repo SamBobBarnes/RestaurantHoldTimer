@@ -14,10 +14,54 @@ describe('TimerButtonComponent', () => {
     };
   });
 
-  it('should show text', async () => {
-    options.text = 'test text';
-    await render(options);
-    expect(screen.getByText('test text')).toBeTruthy();
+  describe('text display', () => {
+    it('should show text', async () => {
+      options.text = 'test text';
+      await render(options);
+      expect(screen.getByText('test text')).toBeTruthy();
+    });
+
+    it('should show text substring when timer is running and text is longer than 8 characters', async () => {
+      options.text = '123456789';
+      await render(options);
+      const timer = screen.getByTitle('timer-click');
+      fireEvent.click(timer);
+      expect(screen.getByText('123456...')).toBeTruthy();
+    });
+
+    it('should show full text when timer is running and text is not longer than 8 characters', async () => {
+      options.text = '12345678';
+      await render(options);
+      const timer = screen.getByTitle('timer-click');
+      fireEvent.click(timer);
+      expect(screen.getByText('12345678')).toBeTruthy();
+    });
+  });
+
+  describe('time display', () => {
+    it('should show correctly formatted if time is less than ten', async () => {
+      options.time = 9;
+      await render(options);
+      const timer = screen.getByTitle('timer-click');
+      fireEvent.click(timer);
+      expect(screen.getByText('0:09')).toBeTruthy();
+    });
+
+    it('should show correctly formatted if time is more than ten and less than 60', async () => {
+      options.time = 59;
+      await render(options);
+      const timer = screen.getByTitle('timer-click');
+      fireEvent.click(timer);
+      expect(screen.getByText('0:59')).toBeTruthy();
+    });
+
+    it('should show correctly formatted if time is more than 59', async () => {
+      options.time = 69;
+      await render(options);
+      const timer = screen.getByTitle('timer-click');
+      fireEvent.click(timer);
+      expect(screen.getByText('1:09')).toBeTruthy();
+    });
   });
 
   it('should show timer-click div by default', async () => {
@@ -37,6 +81,23 @@ describe('TimerButtonComponent', () => {
     const timer = screen.getByTitle('timer-click');
     fireEvent.click(timer);
     expect(screen.getByTitle('progress-bar')).toBeTruthy();
+  });
+
+  it('should show end-bar after timer is complete', async () => {
+    await render(options);
+    const timer = screen.getByTitle('timer-click');
+    fireEvent.click(timer);
+    await new Promise((r) => setTimeout(r, 2000));
+    expect(screen.getByTitle('end-bar')).toBeTruthy();
+  });
+
+  it('should hide end-bar after dismissing', async () => {
+    await render(options);
+    const timer = screen.getByTitle('timer-click');
+    fireEvent.click(timer);
+    await new Promise((r) => setTimeout(r, 2000));
+    fireEvent.click(timer);
+    expect(screen.queryByTitle('end-bar')).toBeFalsy();
   });
 
   describe('choice', () => {
