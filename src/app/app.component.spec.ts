@@ -1,5 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { screen } from '@testing-library/angular';
+import { renderRootComponent } from './common-components/RenderRootComponent';
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -20,12 +22,8 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Restaurant Hold Timer');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'Restaurant Hold Timer!',
-    );
+  it('should render title', async () => {
+    await renderRootComponent(AppComponent);
+    expect(screen.getByText('Restaurant Hold Timer')).toBeTruthy();
   });
 });
